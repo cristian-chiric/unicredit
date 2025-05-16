@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc de Investiții UniCredit</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background: #fafafa;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 0.5rem 2rem 0.5rem;
+        }
+        h1 {
+            color: #B10012; /* sau #990000 pentru contrast mai bun */
+            font-size: 2rem;
+            margin: 1.2rem 0 1.2rem 0.2rem;
+            line-height: 1.1;
+        }
+        .account-box {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            padding: 1.2rem 0.7rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            justify-content: space-between;
+        }
+        .account-box > div {
+            min-width: 44%;
+            font-size: 1.08em;
+        }
+        .account-box strong {
+            color: #B10012; /* sau #990000 pentru contrast mai bun */
+            font-size: 1.07em;
+        }
+        #portfolio-chart-container {
+            margin: 1.5rem 0 1rem 0;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            padding: 1rem 0.5rem 0.5rem 0.5rem;
+        }
+        #portfolio-chart {
+            width: 100%;
+            max-width: 700px;
+            height: 250px;
+        }
+        #depozit-pie-container {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+        }
+        .alloc-row {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0001;
+            margin-bottom: 1.1rem;
+            padding: 1.1rem 0.7rem 0.7rem 0.7rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .alloc-row input[type="number"] {
+            width: 100%;
+            font-size: 1.1em;
+            padding: 0.5em;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        .alloc-row button {
+            background: #B10012; /* sau #990000 pentru contrast mai bun */
+            color: #fff;
+            border: none;
+            padding: 0.7em 1.2em;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 0.5em;
+            font-weight: bold;
+        }
+        .alloc-row .instrument-header {
+            display: flex;
+            align-items: center;
+            gap: 0.7em;
+            flex-wrap: wrap;
+        }
+        .alloc-row .instrument-header .icon {
+            font-size: 1.3em;
+        }
+        .alloc-row .instrument-info {
+            font-size: 0.97em;
+            color: #444;
+            margin-bottom: 0.2em;
+        }
+        .alloc-row .instrument-stats {
+            font-size: 0.97em;
+            color: #222;
+            margin-bottom: 0.2em;
+        }
+        .depozit-options {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .depozit-options label {
+            margin-right: 0.5rem;
+            font-size: 0.97em;
+        }
+        .event-message {
+            font-weight: bold;
+            color: #ED1C24;
+            margin: 1rem 0;
+            font-size: 1.1em;
+        }
+        .quiz {
+            background: #fff5f5;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .quiz input[type="radio"] { margin-right: 0.5rem; }
+        .quiz-result { margin-top: 1rem; }
+        .disabled { pointer-events: none; opacity: 0.5; }
+        #toast-container {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        #modal-info {
+            display:none;
+            position:fixed;
+            z-index:99999;
+            top:0;left:0;width:100vw;height:100vh;
+            background:rgba(0,0,0,0.32);
+            align-items:center;
+            justify-content:center;
+        }
+        #modal-content {
+            background:#fff;
+            border-radius:12px;
+            max-width:95vw;
+            width:400px;
+            padding:2rem 1.2rem;
+            box-shadow:0 8px 32px #0003;
+            position:relative;
+        }
+        #modal-close {
+            position:absolute;
+            top:12px;
+            right:16px;
+            background:none;
+            border:none;
+            font-size:1.5em;
+            cursor:pointer;
+        }
+        @media (max-width: 600px) {
+            .account-box { flex-direction: column; gap: 0.7rem; }
+            #portfolio-chart { height: 180px; }
+            .alloc-row { padding: 1rem 0.5rem 0.5rem 0.5rem; }
+            #modal-content { width: 97vw; padding: 1.2rem 0.5rem; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="toast-container" aria-live="polite"></div>
+    <div id="modal-info" role="dialog" aria-modal="true" aria-labelledby="modal-close">
+      <div id="modal-content">
+        <button id="modal-close" aria-label="Închide">×</button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+    <main>
+        <div id="game-container">
+            <h1>Joc de Investiții UniCredit</h1>
+            <div class="account-box">
+                <div><strong>Cont curent:</strong><br><span id="current-account">2.000 EUR</span></div>
+                <div><strong>Portofoliu total:</strong><br><span id="portfolio">2.000 EUR</span></div>
+                <div><strong>Luna:</strong> <span id="month">1</span> / 12</div>
+                <div><strong>Timp rămas:</strong> <span id="timer">06:00</span></div>
+            </div>
+            <div id="portfolio-chart-container">
+                <canvas id="portfolio-chart" aria-label="Evoluția portofoliului" role="img"></canvas>
+            </div>
+            <div id="depozit-pie-container"></div>
+            <hr>
+            <div id="event" aria-live="polite"></div>
+            <form id="alloc-form"></form>
+            <div id="quiz-container"></div>
+            <div id="messages"></div>
+        </div>
+    </main>
+    <script>
+    // --- Date statice pentru joc ---
+    const instrumentsData = [
+        {
+            id: "cont_economii",
+            name: "Cont de Economii",
+            description: "Risc scăzut, randament scăzut, lichiditate ridicată.",
+            unlock_month: 1,
+            info: {
+                avantaje: [
+                    "Acces rapid la bani",
+                    "Risc foarte scăzut",
+                    "Randament garantat"
+                ],
+                dezavantaje: [
+                    "Randament mic",
+                    "Nu protejează împotriva inflației"
+                ],
+                riscuri: [
+                    "Randamentul poate fi sub rata inflației"
+                ]
+            }
+        },
+        {
+            id: "depozit_termen",
+            name: "Depozit la Termen",
+            description: "Randament fix, lichiditate scăzută, risc scăzut.",
+            unlock_month: 3,
+            info: {
+                avantaje: [
+                    "Randament fix și garantat",
+                    "Lichiditate scăzută, ideal pentru economii pe termen mediu",
+                    "Fără comisioane ascunse"
+                ],
+                dezavantaje: [
+                    "Accesibilitate redusă a fondurilor pe durata depozitului",
+                    "Randament mai mic comparativ cu alte investiții riscante"
+                ],
+                riscuri: [
+                    "Retragerea anticipată duce la pierderea dobânzii",
+                    "Inflația poate eroda puterea de cumpărare a dobânzii"
+                ]
+            }
+        },
+        {
+            id: "fond_mutual",
+            name: "Fond Mutual",
+            description: "Randament variabil, risc moderat, diversificare.",
+            unlock_month: 6,
+            info: {
+                avantaje: [
+                    "Diversificare instantanee a investiției",
+                    "Gestionat de profesioniști",
+                    "Acces la piețe și instrumente financiare variate"
+                ],
+                dezavantaje: [
+                    "Randament variabil, cu riscul de pierderi",
+                    "Comisioane de administrare",
+                    "Lichiditate redusă pe termen scurt"
+                ],
+                riscuri: [
+                    "Piața poate fluctua, afectând valoarea unității de fond",
+                    "Riscul de credit al emitenților de instrumente financiare din fond"
+                ]
+            }
+        }
+    ];
+
+    // Randamente pentru depozit la termen (pe perioada totală, nu lunar)
+    const depozitRates = {
+        "3": 0.7,   // 0.7% pe 3 luni
+        "6": 1.5,   // 1.5% pe 6 luni
+        "12": 3.2   // 3.2% pe 12 luni
+    };
+
+    // Randamente lunare pentru celelalte instrumente
+    const returnsData = [
+        { month: 1, cont_economii: 0.15, fond_mutual: 0 },
+        { month: 2, cont_economii: 0.15, fond_mutual: 0 },
+        { month: 3, cont_economii: 0.15, fond_mutual: 0 },
+        { month: 4, cont_economii: 0.15, fond_mutual: 0 },
+        { month: 5, cont_economii: 0.15, fond_mutual: 0 },
+        { month: 6, cont_economii: 0.15, fond_mutual: 0.7 },
+        { month: 7, cont_economii: 0.15, fond_mutual: 0.7 },
+        { month: 8, cont_economii: 0.15, fond_mutual: 0.7 },
+        { month: 9, cont_economii: 0.15, fond_mutual: 0.7 },
+        { month:10, cont_economii: 0.15, fond_mutual: 0.7 },
+        { month:11, cont_economii: 0.15, fond_mutual: -0.5 },
+        { month:12, cont_economii: 0.15, fond_mutual: 1.2 }
+    ];
+
+    const quizzesData = [
+        {
+            instrument_id: "depozit_termen",
+            title: "Depozit la Termen",
+            questions: [
+                {
+                    question: "Ce se întâmplă dacă retragi banii înainte de scadență?",
+                    options: [
+                        "Primești toată dobânda",
+                        "Primești doar suma depusă, fără dobândă",
+                        "Primești o dobândă mai mică"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Care este riscul principal la depozitul la termen?",
+                    options: [
+                        "Pierderea totală a sumei",
+                        "Pierderea dobânzii",
+                        "Randament variabil"
+                    ],
+                    correct: 1
+                }
+            ]
+        },
+        {
+            instrument_id: "fond_mutual",
+            title: "Fond Mutual",
+            questions: [
+                {
+                    question: "Ce înseamnă diversificarea într-un fond mutual?",
+                    options: [
+                        "Investiția doar în acțiuni",
+                        "Investiția în mai multe tipuri de active",
+                        "Investiția doar în depozite"
+                    ],
+                    correct: 1
+                },
+                {
+                    question: "Care este riscul unui fond mutual?",
+                    options: [
+                        "Randamentul poate varia, inclusiv pierderi",
+                        "Randament garantat",
+                        "Nu există risc"
+                    ],
+                    correct: 0
+                }
+            ]
+        }
+    ];
+
+    // --- Variabile de stare ---
+    let currentAccount = 2000; // bani disponibili
+    let allocations = { cont_economii: 0, depozit_termen: [], fond_mutual: 0 };
+    let depozitActive = []; // {amount, monthsLeft, totalMonths, rate, startMonth}
+    let quizPassed = {};
+    let timer = 6 * 60; // 6 minute = 12 luni
+    let intervalId = null;
+    let autoMonthId = null;
+    let eventsHistory = [];
+    let portfolioHistory = [2000];
+    let currentMonth = 1;
+    let unlockedInstruments = ["cont_economii"];
+    let profitStats = {
+        cont_economii: 0,
+        depozit_termen: 0,
+        fond_mutual: 0
+    };
+
+    // --- Chart.js setup ---
+    let chart;
+    function initChart() {
+        const ctx = document.getElementById('portfolio-chart').getContext('2d');
+        chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Start'],
+                datasets: [{
+                    label: 'Portofoliu total (EUR)',
+                    data: [2000],
+                    borderColor: '#ED1C24',
+                    backgroundColor: 'rgba(237,28,36,0.08)',
+                    tension: 0.2,
+                    fill: true,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#ED1C24'
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 900,
+                    easing: 'easeOutCubic'
+                },
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { title: { display: true, text: 'Luna' } },
+                    y: { title: { display: true, text: 'EUR' }, beginAtZero: true }
+                }
+            }
+        });
+    }
+    function updateChart() {
+        chart.data.labels = ['Start'].concat([...Array(portfolioHistory.length-1).keys()].map(i => `Luna ${i+1}`));
+        chart.data.datasets[0].data = portfolioHistory;
+        chart.update('active');
+    }
+
+    // --- Pie chart pentru depozite la termen ---
+    let depozitPieCharts = [];
+    function renderDepozitPie() {
+        const container = document.getElementById('depozit-pie-container');
+        if (!depozitPieCharts) depozitPieCharts = [];
+        depozitActive.forEach((d, idx) => {
+            let canvasId = `pie-depozit-${idx}`;
+            let chartDiv = document.getElementById(canvasId)?.parentElement;
+            if (!chartDiv) {
+                let div = document.createElement('div');
+                div.innerHTML = `
+                    <div style="text-align:center;font-size:0.9em;margin-bottom:0.5em;">
+                        <strong>${d.amount.toFixed(2)} EUR</strong><br>
+                        ${d.monthsLeft} luni rămase<br>
+                        (${d.totalMonths} luni, ${d.rate}%)
+                    </div>
+                    <canvas id="${canvasId}" width="120" height="120"></canvas>
+                `;
+                container.appendChild(div);
+            } else {
+                chartDiv.querySelector('div').innerHTML = `
+                    <strong>${d.amount.toFixed(2)} EUR</strong><br>
+                    ${d.monthsLeft} luni rămase<br>
+                    (${d.totalMonths} luni, ${d.rate}%)
+                `;
+            }
+            setTimeout(() => {
+                const ctx = document.getElementById(canvasId).getContext('2d');
+                if (depozitPieCharts[idx]) {
+                    depozitPieCharts[idx].data.datasets[0].data = [d.monthsLeft, d.totalMonths - d.monthsLeft];
+                    depozitPieCharts[idx].update('active');
+                } else {
+                    depozitPieCharts[idx] = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Rămas', 'Trecut'],
+                            datasets: [{
+                                data: [d.monthsLeft, d.totalMonths - d.monthsLeft],
+                                backgroundColor: ['#ED1C24', '#d1d5db'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            cutout: '70%',
+                            animation: {
+                                duration: 700,
+                                easing: 'easeOutCubic'
+                            },
+                            plugins: { legend: { display: false } },
+                            tooltips: { enabled: false }
+                        }
+                    });
+                }
+            }, 10);
+        });
+        while (depozitPieCharts.length > depozitActive.length) {
+            try { depozitPieCharts.pop().destroy(); } catch(e){}
+            let oldCanvas = document.getElementById(`pie-depozit-${depozitPieCharts.length}`);
+            if (oldCanvas && oldCanvas.parentElement) oldCanvas.parentElement.remove();
+        }
+    }
+
+    // --- Timer și trecere automată la luna următoare ---
+    function startGameTimers() {
+        intervalId = setInterval(() => {
+            timer--;
+            let min = Math.floor(timer / 60);
+            let sec = timer % 60;
+            document.getElementById('timer').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+            if (timer <= 0) endGame();
+        }, 1000);
+
+        autoMonthId = setInterval(() => {
+            nextMonth();
+        }, 30000);
+    }
+
+    // --- Renderizare formular de alocare ---
+    function renderAllocForm() {
+        const form = document.getElementById('alloc-form');
+        form.innerHTML = '';
+        instrumentsData.forEach(instr => {
+            if (!unlockedInstruments.includes(instr.id)) {
+                if (currentMonth >= instr.unlock_month) {
+                    let unlockBtn = document.createElement('button');
+                    unlockBtn.type = "button";
+                    unlockBtn.textContent = `Deblochează ${instr.name}`;
+                    unlockBtn.onclick = () => showInstrumentInfo(instr.id);
+                    unlockBtn.style.marginBottom = "1rem";
+                    unlockBtn.style.background = "#ED1C24";
+                    unlockBtn.style.color = "#fff";
+                    unlockBtn.style.border = "none";
+                    unlockBtn.style.padding = "0.7em 1.2em";
+                    unlockBtn.style.borderRadius = "6px";
+                    unlockBtn.style.fontSize = "1em";
+                    unlockBtn.style.cursor = "pointer";
+                    form.appendChild(unlockBtn);
+                }
+                return;
+            }
+            let row = document.createElement('div');
+            row.className = 'alloc-row';
+
+            // Sume și profituri pentru fiecare instrument
+            let suma = 0, profit = 0, randament = 0;
+            if (instr.id === "cont_economii") {
+                suma = allocations.cont_economii;
+                profit = profitStats.cont_economii;
+                randament = suma - profit > 0 ? ((profit / (suma - profit)) * 100).toFixed(2) : '0';
+            } else if (instr.id === "depozit_termen") {
+                profit = profitStats.depozit_termen;
+            } else if (instr.id === "fond_mutual") {
+                suma = allocations.fond_mutual;
+                profit = profitStats.fond_mutual;
+                randament = suma - profit > 0 ? ((profit / (suma - profit)) * 100).toFixed(2) : '0';
+            }
+
+            let statsHtml = '';
+            if (instr.id === "depozit_termen") {
+                statsHtml = `
+                    <div class="instrument-stats">
+                        Profit total: <strong>${profit.toFixed(2)} EUR</strong>
+                    </div>
+                `;
+            } else if (instr.id === "cont_economii" || instr.id === "fond_mutual") {
+                statsHtml = `
+                    <div class="instrument-stats">
+                        Suma investită: <strong>${suma.toFixed(2)} EUR</strong><br>
+                        Profit: <strong>${profit.toFixed(2)} EUR</strong> (${randament}%)
+                    </div>
+                `;
+            }
+
+            if (instr.id === "depozit_termen") {
+                row.innerHTML = `
+                    <div class="instrument-header"><span class="icon">🏦</span> <span style="font-weight:bold;color:#ED1C24;">${instr.name}</span></div>
+                    <div class="instrument-info">${instr.description}</div>
+                    ${statsHtml}
+                    <div class="depozit-options">
+                        <label><input type="radio" name="depozit_period" value="3" checked>3 luni<br><span style="font-size:0.85em;color:#888;">${depozitRates["3"]}% total</span></label>
+                        <label><input type="radio" name="depozit_period" value="6">6 luni<br><span style="font-size:0.85em;color:#888;">${depozitRates["6"]}% total</span></label>
+                        <label><input type="radio" name="depozit_period" value="12">12 luni<br><span style="font-size:0.85em;color:#888;">${depozitRates["12"]}% total</span></label>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <input type="number" min="0" max="${currentAccount}" step="0.01" id="input-depozit" placeholder="Suma">
+                        <button type="button" id="add-depozit">Investește</button>
+                    </div>
+                `;
+                form.appendChild(row);
+                setTimeout(() => {
+                    const input = document.getElementById('input-depozit');
+                    input.value = '';
+                    input.addEventListener('focus', () => { input.value = ''; });
+                    document.getElementById('add-depozit').onclick = () => {
+                        let period = document.querySelector('input[name="depozit_period"]:checked').value;
+                        let amount = parseFloat(input.value) || 0;
+                        if (amount > 0 && amount <= currentAccount) {
+                            depozitActive.push({amount, monthsLeft: parseInt(period), totalMonths: parseInt(period), rate: depozitRates[period], startMonth: currentMonth});
+                            currentAccount -= amount;
+                            showNotification(`Ai investit ${amount.toFixed(2)} EUR pe ${period} luni la depozit.`);
+                            renderAllocForm();
+                            updateAccountUI();
+                            renderDepozitPie();
+                        }
+                    };
+                }, 100);
+            } else if (instr.id === "cont_economii") {
+                row.innerHTML = `
+                    <div class="instrument-header"><span class="icon">💶</span> <span style="font-weight:bold;color:#B10012;">${instr.name}</span></div>
+                    <div class="instrument-info">${instr.description}</div>
+                    ${statsHtml}
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <input type="number" min="0" max="${currentAccount}" step="0.01" id="input-cont-economii" placeholder="Suma" aria-label="Suma pentru cont de economii">
+                        <button type="button" id="alimentare-btn">Alimentează</button>
+                        <button type="button" id="retragere-btn" ${suma > 0 ? '' : 'disabled'}>Retragere</button>
+                    </div>
+                `;
+                form.appendChild(row);
+                setTimeout(() => {
+                    const input = document.getElementById('input-cont-economii');
+                    input.value = '';
+                    input.addEventListener('focus', () => { input.value = ''; });
+                    document.getElementById('alimentare-btn').onclick = () => {
+                        let amount = parseFloat(input.value) || 0;
+                        if (amount > 0 && amount <= currentAccount) {
+                            allocations.cont_economii += amount;
+                            currentAccount -= amount;
+                            showNotification(`Ai transferat ${amount.toFixed(2)} EUR în contul de economii.`);
+                            renderAllocForm();
+                            updateAccountUI();
+                        }
+                    };
+                    document.getElementById('retragere-btn').onclick = () => {
+                        let amount = parseFloat(input.value) || 0;
+                        if (amount > 0 && amount <= allocations.cont_economii) {
+                            allocations.cont_economii -= amount;
+                            currentAccount += amount;
+                            showNotification(`Ai retras ${amount.toFixed(2)} EUR din contul de economii.`);
+                            renderAllocForm();
+                            updateAccountUI();
+                        }
+                    };
+                }, 100);
+            } else if (instr.id === "fond_mutual") {
+                let randamentLuna = currentMonth >= 6
+                    ? returnsData.find(r => r.month === currentMonth)?.fond_mutual || 0
+                    : 0;
+                row.innerHTML = `
+                    <div class="instrument-header"><span class="icon">📈</span> <span style="font-weight:bold;color:#ED1C24;">${instr.name}</span></div>
+                    <div class="instrument-info">${instr.description}<br>
+                        <span style="color:#22c55e;">Randament luna curentă: ${randamentLuna}%</span>
+                    </div>
+                    ${statsHtml}
+                    <div style="display:flex;gap:0.5rem;align-items:center;">
+                        <input type="number" min="0" max="${currentAccount}" step="0.01" id="input-fond_mutual" placeholder="Suma" aria-label="Suma pentru fond mutual">
+                        <button type="button" id="add-fond_mutual">Investește</button>
+                    </div>
+                `;
+                form.appendChild(row);
+                setTimeout(() => {
+                    const input = document.getElementById('input-fond_mutual');
+                    input.value = '';
+                    input.addEventListener('focus', () => { input.value = ''; });
+                    document.getElementById('add-fond_mutual').onclick = () => {
+                        let amount = parseFloat(input.value) || 0;
+                        if (amount > 0 && amount <= currentAccount) {
+                            allocations.fond_mutual += amount;
+                            currentAccount -= amount;
+                            showNotification(`Ai investit ${amount.toFixed(2)} EUR în Fond Mutual.`);
+                            renderAllocForm();
+                            updateAccountUI();
+                        }
+                    };
+                }, 100);
+            }
+        });
+        renderDepozitPie();
+    }
+
+    function updateAccountUI() {
+        let depoziteSum = depozitActive.reduce((sum, d) => sum + d.amount, 0);
+        let total = currentAccount + allocations.cont_economii + allocations.fond_mutual + depoziteSum;
+        document.getElementById('current-account').textContent = `${currentAccount.toFixed(2)} EUR`;
+        document.getElementById('portfolio').textContent = `${total.toFixed(2)} EUR`;
+    }
+
+    // --- Quiz logic ---
+    function showQuiz(instrumentId) {
+        const quiz = quizzesData.find(q => q.instrument_id === instrumentId);
+        if (!quiz) return;
+        const container = document.getElementById('quiz-container');
+        let html = `<div class="quiz"><h3>Test: ${quiz.title}</h3>`;
+        quiz.questions.forEach((q, i) => {
+            html += `<div><strong>${q.question}</strong><br>`;
+            q.options.forEach((opt, j) => {
+                html += `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label><br>`;
+            });
+            html += `</div>`;
+        });
+        html += `<button onclick="submitQuiz('${instrumentId}')">Trimite Testul</button></div>`;
+        container.innerHTML = html;
+    }
+
+    function submitQuiz(instrumentId) {
+        const quiz = quizzesData.find(q => q.instrument_id === instrumentId);
+        let score = 0;
+        quiz.questions.forEach((q, i) => {
+            let selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && parseInt(selected.value) === q.correct) score++;
+        });
+        let percent = (score / quiz.questions.length) * 100;
+        let container = document.getElementById('quiz-container');
+        if (percent >= 80) {
+            unlockedInstruments.push(instrumentId);
+            quizPassed[instrumentId] = true;
+            container.innerHTML = `<div class="quiz-result success">Felicitări! Ai deblocat <strong>${quiz.title}</strong>.</div>`;
+            setTimeout(() => { container.innerHTML = ''; renderAllocForm(); }, 1500);
+        } else {
+            container.innerHTML += `<div class="quiz-result fail">Ai obținut ${percent}%. Ai nevoie de 80% pentru deblocare. Încearcă din nou.</div>`;
+        }
+    }
+
+    function showInstrumentInfo(instrId) {
+        const instr = instrumentsData.find(i => i.id === instrId);
+        if (!instr) return;
+        const modal = document.getElementById('modal-info');
+        const body = document.getElementById('modal-body');
+        body.innerHTML = `
+            <h2 style="color:#ED1C24;font-size:1.3em;margin-bottom:0.5em;">${instr.name}</h2>
+            <div style="margin-bottom:1em;">${instr.description}</div>
+            <div style="margin-bottom:0.7em;">
+                <strong>Avantaje:</strong>
+                <ul>${(instr.info?.avantaje||[]).map(a=>`<li>${a}</li>`).join('')}</ul>
+            </div>
+            <div style="margin-bottom:0.7em;">
+                <strong>Dezavantaje:</strong>
+                <ul>${(instr.info?.dezavantaje||[]).map(a=>`<li>${a}</li>`).join('')}</ul>
+            </div>
+            <div style="margin-bottom:1em;">
+                <strong>Riscuri:</strong>
+                <ul>${(instr.info?.riscuri||[]).map(a=>`<li>${a}</li>`).join('')}</ul>
+            </div>
+            <button id="modal-next-quiz" style="background:#ED1C24;color:#fff;border:none;padding:0.6em 1.2em;border-radius:6px;font-size:1em;cursor:pointer;">Continuă către quiz</button>
+        `;
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+        document.getElementById('modal-close').onclick = closeModal;
+        document.getElementById('modal-next-quiz').onclick = () => showQuizInModal(instrId);
+    }
+
+    function showQuizInModal(instrId) {
+        const quiz = quizzesData.find(q => q.instrument_id === instrId);
+        if (!quiz) return;
+        const body = document.getElementById('modal-body');
+        let html = `<h3 style="color:#ED1C24;">Test: ${quiz.title}</h3>`;
+        quiz.questions.forEach((q, i) => {
+            html += `<div style="margin-bottom:0.7em;"><strong>${q.question}</strong><br>`;
+            q.options.forEach((opt, j) => {
+                html += `<label><input type="radio" name="q${i}" value="${j}"> ${opt}</label><br>`;
+            });
+            html += `</div>`;
+        });
+        html += `<button id="modal-quiz-submit" style="background:#ED1C24;color:#fff;border:none;padding:0.6em 1.2em;border-radius:6px;font-size:1em;cursor:pointer;">Trimite Testul</button>
+        <div id="modal-quiz-result" style="margin-top:1em;"></div>`;
+        body.innerHTML = html;
+        document.getElementById('modal-quiz-submit').onclick = () => submitQuizInModal(instrId);
+    }
+
+    function submitQuizInModal(instrId) {
+        const quiz = quizzesData.find(q => q.instrument_id === instrId);
+        let score = 0;
+        quiz.questions.forEach((q, i) => {
+            let selected = document.querySelector(`#modal-body input[name="q${i}"]:checked`);
+            if (selected && parseInt(selected.value) === q.correct) score++;
+        });
+        let percent = (score / quiz.questions.length) * 100;
+        let resultDiv = document.getElementById('modal-quiz-result');
+        if (percent >= 80) {
+            unlockedInstruments.push(instrId);
+            quizPassed[instrId] = true;
+            resultDiv.innerHTML = `<span style="color:#22c55e;font-weight:bold;">Felicitări! Ai deblocat <strong>${quiz.title}</strong>.</span>`;
+            setTimeout(() => {
+                closeModal();
+                renderAllocForm();
+            }, 1300);
+        } else {
+            resultDiv.innerHTML = `<span style="color:#ED1C24;">Ai obținut ${percent}%. Ai nevoie de 80% pentru deblocare. Încearcă din nou.</span>`;
+        }
+    }
+
+    function closeModal() {
+        document.getElementById('modal-info').style.display = "none";
+        document.body.style.overflow = "";
+    }
+
+    // --- Evenimente aleatorii ---
+    function randomEvent() {
+        if (Math.random() < 0.2) {
+            const events = [
+                { msg: "Reparație mașină", cost: 400 },
+                { msg: "Cheltuieli medicale", cost: 350 },
+                { msg: "Vacanță spontană", cost: 250 },
+                { msg: "Electrocasnice stricate", cost: 300 },
+                { msg: "Ajutor pentru familie", cost: 200 }
+            ];
+            const ev = events[Math.floor(Math.random() * events.length)];
+            currentAccount -= ev.cost;
+            eventsHistory.push(`Luna ${currentMonth}: ${ev.msg} -${ev.cost} EUR`);
+            document.getElementById('event').innerHTML = `<div class="event-message">${ev.msg}: -${ev.cost} EUR</div>`;
+            updateAccountUI();
+        } else {
+            document.getElementById('event').innerHTML = '';
+        }
+    }
+
+    // --- Luna următoare (automat la 30s) ---
+    function nextMonth() {
+        // Aplică dobândă la cont economii
+        let returns = returnsData.find(r => r.month === currentMonth) || {};
+        let profit_economii = allocations.cont_economii * ((returns.cont_economii || 0) / 100);
+        allocations.cont_economii += profit_economii;
+        profitStats.cont_economii += profit_economii;
+
+        // Fond mutual
+        let profit_fond = allocations.fond_mutual * ((returns.fond_mutual || 0) / 100);
+        allocations.fond_mutual += profit_fond;
+        profitStats.fond_mutual += profit_fond;
+
+        // Depozite la termen: scad luni, la scadență adaugă suma + dobândă
+        depozitActive.forEach(d => d.monthsLeft--);
+        let matured = depozitActive.filter(d => d.monthsLeft === 0);
+        matured.forEach(d => {
+            let sumaFinala = d.amount + d.amount * (d.rate / 100);
+            currentAccount += sumaFinala;
+            profitStats.depozit_termen += sumaFinala - d.amount;
+            showNotification(`Depozitul la termen (${d.amount.toFixed(2)} EUR, ${d.totalMonths} luni) a ajuns la scadență. Ai primit ${sumaFinala.toFixed(2)} EUR!`);
+        });
+        depozitActive = depozitActive.filter(d => d.monthsLeft > 0);
+
+        // Eveniment aleatoriu
+        randomEvent();
+
+        // Alimentare automată cont curent
+        currentAccount += 2000;
+        showNotification("Contul tău curent a fost alimentat cu 2.000 EUR!");
+
+        // Actualizare UI și istoric
+        updateAccountUI();
+        renderDepozitPie();
+        let depoziteSum = depozitActive.reduce((sum, d) => sum + d.amount, 0);
+        let total = currentAccount + allocations.cont_economii + allocations.fond_mutual + depoziteSum;
+        portfolioHistory.push(total);
+        updateChart();
+
+        currentMonth++;
+        document.getElementById('month').textContent = currentMonth;
+        if (currentMonth > 12) {
+            endGame();
+            return;
+        }
+        renderAllocForm();
+    }
+
+    // --- Final de joc ---
+    function endGame() {
+        clearInterval(intervalId);
+        clearInterval(autoMonthId);
+
+        // Bilant profitabilitate
+        let maxProfit = Math.max(...Object.values(profitStats));
+        let best = Object.entries(profitStats)
+            .filter(([k, v]) => v === maxProfit)
+            .map(([k]) => instrumentsData.find(i => i.id === k)?.name || k)
+            .join(', ');
+
+        let profitList = Object.entries(profitStats)
+            .map(([k, v]) => `<li><strong>${instrumentsData.find(i => i.id === k)?.name || k}:</strong> ${v.toFixed(2)} EUR profit</li>`)
+            .join('');
+
+        let totalInvested = 2000 * 12; // 2000 alimentare/lună * 12 luni
+        let totalFinal = portfolioHistory[portfolioHistory.length-1];
+        let totalProfit = totalFinal - totalInvested;
+        let randamentFinal = ((totalProfit / totalInvested) * 100).toFixed(2);
+
+        document.getElementById('game-container').innerHTML = `
+            <h1>Joc Terminat</h1>
+            <p><strong>Portofoliu Final:</strong> ${totalFinal.toFixed(2)} EUR</p>
+            <p><strong>Câștig total:</strong> ${totalProfit.toFixed(2)} EUR</p>
+            <p><strong>Randament total:</strong> ${randamentFinal}%</p>
+            <div id="portfolio-chart-container">
+                <canvas id="portfolio-chart" aria-label="Evoluția portofoliului" role="img"></canvas>
+            </div>
+            <h3>Evenimente întâmpinate:</h3>
+            <ul>${eventsHistory.length ? eventsHistory.map(e => `<li>${e}</li>`).join('') : '<li>Niciun eveniment major</li>'}</ul>
+            <h3>Profit pe instrument:</h3>
+            <ul>${profitList}</ul>
+            <h3>Cel mai profitabil instrument:</h3>
+            <p style="font-size:1.2em;color:#22c55e;"><strong>${best}</strong></p>
+            <p>Mulțumim că ai jucat! Ai învățat despre diversificare, risc și instrumente financiare UniCredit.</p>
+            <button onclick="window.location.reload()" style="margin-top:1.5em;background:#ED1C24;color:#fff;border:none;padding:0.8em 2em;border-radius:8px;font-size:1.1em;cursor:pointer;">Reia jocul</button>
+        `;
+        setTimeout(() => {
+            initChart();
+            updateChart();
+        }, 100);
+    }
+
+    // --- Inițializare joc ---
+    function initGame() {
+        currentMonth = 1;
+        portfolioHistory = [2000];
+        document.getElementById('month').textContent = currentMonth;
+        initChart();
+        updateChart();
+        updateAccountUI();
+        renderAllocForm();
+        renderDepozitPie();
+        startGameTimers();
+    }
+    window.showQuiz = showQuiz;
+    window.submitQuiz = submitQuiz;
+    initGame();
+
+    // Toast notification (durează 8.5s)
+    function showNotification(msg) {
+        let toast = document.createElement('div');
+        toast.textContent = msg;
+        toast.style.background = '#e6f7e6';
+        toast.style.borderLeft = '5px solid #22c55e';
+        toast.style.padding = '1rem 1.5rem';
+        toast.style.borderRadius = '8px';
+        toast.style.fontWeight = 'bold';
+        toast.style.color = '#137333';
+        toast.style.boxShadow = '0 2px 8px #0002';
+        toast.style.minWidth = '220px';
+        toast.style.maxWidth = '320px';
+        toast.style.fontSize = '1rem';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(-20px)';
+        toast.style.transition = 'opacity 0.4s, transform 0.4s';
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        toast.className = 'assistant-message bg-green-100';
+
+        const toastContainer = document.getElementById('toast-container');
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+        }, 10);
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-20px)';
+            setTimeout(() => toast.remove(), 500);
+        }, 8500);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{
+    "returns": [
+        {
+            "month": 1,
+            "cont_economii": 0.5,
+            "depozit_termen": 0,
+            "fond_investitii": 0,
+            "produs_structurat": 0
+        },
+        {
+            "month": 2,
+            "cont_economii": 0.5,
+            "depozit_termen": 0,
+            "fond_investitii": 0,
+            "produs_structurat": 0
+        },
+        {
+            "month": 3,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 0,
+            "produs_structurat": 0
+        },
+        {
+            "month": 4,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 0,
+            "produs_structurat": 0
+        },
+        {
+            "month": 5,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 0
+        },
+        {
+            "month": 6,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 0
+        },
+        {
+            "month": 7,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 3
+        },
+        {
+            "month": 8,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 3
+        },
+        {
+            "month": 9,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 3
+        },
+        {
+            "month": 10,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 3
+        },
+        {
+            "month": 11,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 4
+        },
+        {
+            "month": 12,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 4
+        },
+        {
+            "month": 13,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 4
+        },
+        {
+            "month": 14,
+            "cont_economii": 0.5,
+            "depozit_termen": 1,
+            "fond_investitii": 2,
+            "produs_structurat": 4
+        }
+    ]
+}

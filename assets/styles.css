@@ -1,0 +1,157 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background: #ED1C24;
+    color: #fff;
+    padding: 1.5rem 0;
+    text-align: center;
+}
+header h1, header h2, header p {
+    color: #fff;
+}
+main {
+    max-width: 700px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #0001;
+    padding: 2rem;
+}
+h1, h2 {
+    color: #ED1C24;
+}
+.section {
+    margin-bottom: 2rem;
+}
+.phishing-example {
+    background: #fff5f5;
+    border-left: 5px solid #ED1C24;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+}
+.tip {
+    background: #e6f7e6;
+    border-left: 5px solid #22c55e;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 8px;
+}
+.quiz-question {
+    margin-bottom: 1.5rem;
+}
+.quiz-option {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.quiz-option.selected {
+    background: #ED1C24;
+    color: #fff;
+    border-color: #ED1C24;
+}
+.quiz-result {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+.quiz-result.success {
+    background: #e6f7e6;
+    color: #137333;
+}
+.quiz-result.fail {
+    background: #fff5f5;
+    color: #b91c1c;
+}
+button {
+    background: #ED1C24;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s;
+}
+button:hover, button:focus {
+    background: #b91c1c;
+}
+@media (max-width: 600px) {
+    main { padding: 1rem; }
+}
+.unicredit-red {
+    background-color: #ED1C24;
+}
+.bg-unicredit-red {
+    background-color: #ED1C24;
+}
+.assistant-message {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    animation: slideIn 0.3s ease-in;
+    border-left: 6px solid #ED1C24;
+    font-size: 1.1rem;
+    min-height: 48px;
+}
+.assistant-message.bg-green-100 {
+    border-left-color: #22c55e;
+}
+.assistant-message.bg-yellow-100 {
+    border-left-color: #eab308;
+}
+.assistant-message.bg-red-100 {
+    border-left-color: #ED1C24;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+input:invalid {
+    border-color: #ED1C24;
+}
+input:invalid:focus {
+    outline: 2px solid #ED1C24;
+}
+.step {
+    transition: opacity 0.3s ease;
+}
+.hidden {
+    display: none;
+}
+#bar-housing, #bar-groceries, #bar-others, #bar-savings {
+    transition: width 0.5s;
+}
+#bar-housing { background-color: #f87171; }
+#bar-groceries { background-color: #fde68a; }
+#bar-others { background-color: #d1d5db; }
+#bar-savings { background-color: #4ade80; }
+#bar-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #374151;
+}
+footer.unicredit-red {
+    background-color: #ED1C24;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}

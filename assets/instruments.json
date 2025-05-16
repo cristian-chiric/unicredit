@@ -1,0 +1,28 @@
+{
+    "instruments": [
+        {
+            "id": "cont_economii",
+            "name": "Cont de Economii",
+            "description": "Un cont de economii oferă un loc sigur pentru a-ți păstra economiile, cu un randament scăzut, dar cu lichiditate ridicată.",
+            "unlock_month": 1
+        },
+        {
+            "id": "depozit_termen",
+            "name": "Depozit la Termen",
+            "description": "Un depozit la termen oferă un randament fix pe o perioadă determinată, dar cu lichiditate scăzută.",
+            "unlock_month": 3
+        },
+        {
+            "id": "fond_investitii",
+            "name": "Fond de Investiții",
+            "description": "Un fond de investiții echilibrat oferă diversificare și un risc moderat, cu potențial de randamente mai mari.",
+            "unlock_month": 6
+        },
+        {
+            "id": "produs_structurat",
+            "name": "Produs de Investiție Structurat",
+            "description": "Un produs de investiție structurat are un risc ridicat și este complex, având potențial de randamente mari sau pierderi.",
+            "unlock_month": 9
+        }
+    ]
+}

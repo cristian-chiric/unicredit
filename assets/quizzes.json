@@ -1,0 +1,100 @@
+{
+  "quizzes": [
+    {
+      "instrument_id": "cont_economii",
+      "title": "Test pentru Cont de Economii",
+      "questions": [
+        {
+          "question": "Care este principalul avantaj al unui cont de economii?",
+          "options": [
+            "Randament mare",
+            "Lichiditate ridicată",
+            "Risc ridicat"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Ce tip de risc este asociat cu un cont de economii?",
+          "options": [
+            "Risc de piață",
+            "Risc de credit",
+            "Risc scăzut"
+          ],
+          "correct": 2
+        }
+      ]
+    },
+    {
+      "instrument_id": "depozit_termen",
+      "title": "Test pentru Depozit la Termen",
+      "questions": [
+        {
+          "question": "Ce este un depozit la termen?",
+          "options": [
+            "Un cont cu acces imediat",
+            "Un cont cu o perioadă fixă de maturitate",
+            "Un cont cu randamente variabile"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Care este principalul dezavantaj al unui depozit la termen?",
+          "options": [
+            "Randament scăzut",
+            "Lichiditate scăzută",
+            "Risc ridicat"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "instrument_id": "fond_investitii",
+      "title": "Test pentru Fond de Investiții",
+      "questions": [
+        {
+          "question": "Ce este un fond de investiții?",
+          "options": [
+            "Un cont de economii",
+            "Un vehicul de investiții care adună bani de la mai mulți investitori",
+            "Un tip de depozit la termen"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Care este riscul asociat cu fondurile de investiții?",
+          "options": [
+            "Risc scăzut",
+            "Risc moderat spre ridicat",
+            "Fără risc"
+          ],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "instrument_id": "produs_structurat",
+      "title": "Test pentru Produs Structurat",
+      "questions": [
+        {
+          "question": "Ce caracterizează un produs structurat?",
+          "options": [
+            "Este un produs simplu și fără risc",
+            "Este complex și poate avea randamente variabile",
+            "Este garantat de stat"
+          ],
+          "correct": 1
+        },
+        {
+          "question": "Care este principalul risc al produselor structurate?",
+          "options": [
+            "Risc de lichiditate",
+            "Risc de credit",
+            "Risc de piață"
+          ],
+          "correct": 2
+        }
+      ]
+    }
+  ]
+}
