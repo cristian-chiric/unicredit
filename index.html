@@ -395,7 +395,7 @@
                         if (amount > 0 && amount <= currentAccount) {
                             depozitActive.push({amount, monthsLeft: parseInt(period), totalMonths: parseInt(period), rate: depozitRates[period], startMonth: currentMonth});
                             currentAccount -= amount;
-                            showNotification(`Ai investit ${amount.toFixed(2)} EUR pe ${period} luni la depozit.`);
+                            showNotification(`Ai investit ${amount.toFixed(2)} EUR pe ${period} luni la depozit.`, "success");
                             renderAllocForm();
                             updateAccountUI();
                             renderDepozitPie();
@@ -423,7 +423,7 @@
                         if (amount > 0 && amount <= currentAccount) {
                             allocations.cont_economii += amount;
                             currentAccount -= amount;
-                            showNotification(`Ai transferat ${amount.toFixed(2)} EUR în contul de economii.`);
+                            showNotification(`Ai transferat ${amount.toFixed(2)} EUR în contul de economii.`, "success");
                             renderAllocForm();
                             updateAccountUI();
                         }
@@ -433,7 +433,7 @@
                         if (amount > 0 && amount <= allocations.cont_economii) {
                             allocations.cont_economii -= amount;
                             currentAccount += amount;
-                            showNotification(`Ai retras ${amount.toFixed(2)} EUR din contul de economii.`);
+                            showNotification(`Ai retras ${amount.toFixed(2)} EUR din contul de economii.`, "success");
                             renderAllocForm();
                             updateAccountUI();
                         }
@@ -464,7 +464,7 @@
                         if (amount > 0 && amount <= currentAccount) {
                             allocations.fond_mutual += amount;
                             currentAccount -= amount;
-                            showNotification(`Ai investit ${amount.toFixed(2)} EUR în Fond Mutual.`);
+                            showNotification(`Ai investit ${amount.toFixed(2)} EUR în Fond Mutual.`, "success");
                             renderAllocForm();
                             updateAccountUI();
                         }
@@ -631,7 +631,7 @@
             let sumaFinala = d.amount + d.amount * (d.rate / 100);
             currentAccount += sumaFinala;
             profitStats.depozit_termen += sumaFinala - d.amount;
-            showNotification(`Depozitul la termen (${d.amount.toFixed(2)} EUR, ${d.totalMonths} luni) a ajuns la scadență. Ai primit ${sumaFinala.toFixed(2)} EUR!`);
+            showNotification(`Depozitul la termen (${d.amount.toFixed(2)} EUR, ${d.totalMonths} luni) a ajuns la scadență. Ai primit ${sumaFinala.toFixed(2)} EUR!`, "success");
         });
         depozitActive = depozitActive.filter(d => d.monthsLeft > 0);
 
@@ -640,7 +640,7 @@
 
         // Alimentare automată cont curent
         currentAccount += 2000;
-        showNotification("Contul tău curent a fost alimentat cu 2.000 EUR!");
+        showNotification("Contul tău curent a fost alimentat cu 2.000 EUR!", "info");
 
         // Actualizare UI și istoric
         updateAccountUI();
@@ -720,25 +720,12 @@
     initGame();
 
     // Toast notification (durează 8.5s)
-    function showNotification(msg) {
+    function showNotification(msg, type = "info") {
+        // type: "info" (albastru) sau "danger" (roșu)
+        let icon = type === "danger" ? "⛔" : "ℹ️";
         let toast = document.createElement('div');
-        toast.textContent = msg;
-        toast.style.background = '#e6f7e6';
-        toast.style.borderLeft = '5px solid #22c55e';
-        toast.style.padding = '1rem 1.5rem';
-        toast.style.borderRadius = '8px';
-        toast.style.fontWeight = 'bold';
-        toast.style.color = '#137333';
-        toast.style.boxShadow = '0 2px 8px #0002';
-        toast.style.minWidth = '220px';
-        toast.style.maxWidth = '320px';
-        toast.style.fontSize = '1rem';
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(-20px)';
-        toast.style.transition = 'opacity 0.4s, transform 0.4s';
-        toast.setAttribute('role', 'status');
-        toast.setAttribute('aria-live', 'polite');
-        toast.className = 'assistant-message bg-green-100';
+        toast.className = `toast-message ${type === "danger" ? "toast-error" : ""}`;
+        toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${msg}</span>`;
 
         const toastContainer = document.getElementById('toast-container');
         toastContainer.appendChild(toast);
@@ -752,7 +739,7 @@
             toast.style.opacity = '0';
             toast.style.transform = 'translateY(-20px)';
             setTimeout(() => toast.remove(), 500);
-        }, 8500);
+        }, 4000);
     }
     </script>
 </body>
