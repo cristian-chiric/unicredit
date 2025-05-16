@@ -25,7 +25,6 @@ Jocul financiar interactiv UniCredit este o simulare educativă care permite juc
 - **Cont de Economii**: Risc scăzut, lichiditate ridicată.
 - **Depozit la Termen**: Risc mediu, randament fix.
 - **Fond de Investiții**: Risc moderat, diversificat.
-- **Produs de Investiție Structurat**: Risc ridicat, complex.
 
 ## Obiective Educaționale
 Jocul are ca scop educarea jucătorilor cu privire la produsele financiare, toleranța la risc și importanța diversificării investițiilor. Aceasta este o oportunitate de a învăța prin experiență, similar cu platformele educaționale existente.

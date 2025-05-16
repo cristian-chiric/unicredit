@@ -231,20 +231,19 @@
         {
             id: "depozit_termen",
             name: "Depozit la Termen",
-            description: "Randament fix, lichiditate scăzută, risc scăzut.",
+            description: "Randament fix, risc scăzut.",
             unlock_month: 3,
             info: {
                 avantaje: [
                     "Randament fix și garantat",
-                    "Lichiditate scăzută, ideal pentru economii pe termen mediu",
+                    "Ideal pentru economii pe termen mediu",
                     "Fără comisioane ascunse"
                 ],
                 dezavantaje: [
-                    "Accesibilitate redusă a fondurilor pe durata depozitului",
-                    "Randament mai mic comparativ cu alte investiții riscante"
+                    "Randament mai mic comparativ cu alte investiții riscante",
+                    "Retragerea anticipată duce la pierderea dobânzii"
                 ],
                 riscuri: [
-                    "Retragerea anticipată duce la pierderea dobânzii",
                     "Inflația poate eroda puterea de cumpărare a dobânzii"
                 ]
             }
@@ -267,7 +266,8 @@
                 ],
                 riscuri: [
                     "Piața poate fluctua, afectând valoarea unității de fond",
-                    "Riscul de credit al emitenților de instrumente financiare din fond"
+                    "Riscul de credit al emitenților de instrumente financiare din fond",
+                    "Inflația poate eroda puterea de cumpărare a câștigurilor."
                 ]
             }
         }
@@ -275,9 +275,9 @@
 
     // Randamente pentru depozit la termen (pe perioada totală, nu lunar)
     const depozitRates = {
-        "3": 0.7,   // 0.7% pe 3 luni
-        "6": 1.5,   // 1.5% pe 6 luni
-        "12": 3.2   // 3.2% pe 12 luni
+        "3": 5.0,   // 5.0% pe 3 luni
+        "6": 5.1,   // 5.1% pe 6 luni
+        "12": 5.2   // 5.2% pe 12 luni
     };
 
     // Randamente lunare pentru celelalte instrumente
