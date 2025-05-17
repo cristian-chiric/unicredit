@@ -22,7 +22,7 @@
         </div>
     </div>
     <main class="uc-dashboard">
-        <h1 class="uc-dashboard__title">Joc de Investiții UniCredit</h1>
+        <h1 class="uc-dashboard__title">Joc educațional: Investește inteligent</h1>
         <div id="game-container">
             <div class="account-box">
                 <div><strong>Cont curent:</strong><br><span id="current-account">2.000 EUR</span></div>
@@ -736,7 +736,7 @@
         let randamentFinal = ((totalProfit / totalInvested) * 100).toFixed(2);
 
         document.getElementById('game-container').innerHTML = `
-            <h1>Joc Terminat</h1>
+            <h1>Felicitări! Ai finalizat simularea financiară</h1>
             <p><strong>Portofoliu Final:</strong> ${totalFinal.toFixed(2)} EUR</p>
             <p><strong>Câștig total:</strong> ${totalProfit.toFixed(2)} EUR</p>
             <p><strong>Randament total:</strong> ${randamentFinal}%</p>
@@ -748,7 +748,7 @@
             <h3>Profit pe instrument:</h3>
             <ul>${profitList}</ul>
             <h3>Cel mai profitabil instrument:</h3>
-            <p style="font-size:1.2em;color:#22c55e;"><strong>${best}</strong></p>
+            <p style="font-size:1.2em;color:#E2001A;"><strong>${best}</strong></p>
             <p>Mulțumim că ai jucat! Ai învățat despre diversificare, risc și instrumente financiare UniCredit.</p>
             <button onclick="window.location.reload()" class="button-primary" style="margin-top:1.5em;">Reia jocul</button>
         `;
