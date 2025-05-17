@@ -47,34 +47,52 @@ UniCredit Bank.”</em>
             <div class="quiz" data-type="email">
                 <div class="phishing-example">
                     <strong>Exemplu 2:</strong><br>
-                    <em>„Bună ziua, vă trimitem extrasul de cont solicitat. O zi frumoasă!”</em>
-                </div>
-                <div>
-                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
-                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
-                </div>
-            </div>
-            <div class="quiz" data-type="email">
-                <div class="phishing-example">
-                    <strong>Exemplu 3:</strong><br>
-                    <em>„Felicitări! Ați câștigat un premiu. Trimiteți CNP-ul și IBAN-ul pentru a primi banii.”</em>
+
+                    <em>„(nu ați efectuat nicio operațiune)<br/>
+Stimate client,<br/><br/>
+
+Pentru a confirma plata efectuată la MyStorage S.R.L., faceți click pe următorul <a href="#">link</a>. 
+<br/><br/>
+O zi frumoasă!<br/>
+UniCredit bank”</em>
                 </div>
                 <div>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
                     <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
                 </div>
             </div>
-            <div class="tip">
-                <strong>Știai că?</strong> Emailurile care cer date personale sau accesarea unor linkuri suspecte sunt de obicei tentative de fraudă.
+            <div class="quiz" data-type="email">
+                <div class="phishing-example">
+                    <strong>Exemplu 3:</strong><br>
+                    <em>„Stimate client,<br/><br/>
+Dorim să va anunțăm că, începând cu data de 20.05.2026, va intra în vigoare noul regulament GDPR. Pentru a vedea modificările în modul în care procesăm datele, accesați adresa <a href="#">https://www.unicredit.ro/ro/persoane-fizice/Diverse/protectia-datelor.html</a>.
+<br/><br/>
+O zi frumoasă!<br/>
+UniCredit Bank”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
+                </div>
             </div>
+            <section class="uc-info-banner" aria-label="Scop educațional">
+                <svg class="uc-info-banner__icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="12" fill="#007A91"/>
+                    <text x="12" y="17" text-anchor="middle" font-size="14" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">i</text>
+                </svg>
+                <div>
+                    <strong>Știai că?</strong> Email-urile care cer date personale sau accesarea unor linkuri suspecte sunt de obicei tentative de fraudă.</div>
+            </section>
         </section>
 
         <section class="section" id="phone-quiz">
             <h2>Telefon – Recunoaște frauda</h2>
+            <p>Primiți următorul telefon din partea unei așa-zise persoane aparținând UniCredit, de la numărul pe care îl găsiți pe site-ul companiei. Cum apreciați conținutul său?</p>
             <div class="quiz" data-type="phone">
                 <div class="phishing-example">
                     <strong>Exemplu 1:</strong><br>
-                    <em>„Sunt de la bancă. Vă rog să-mi spuneți codul primit prin SMS pentru a vă verifica identitatea.”</em>
+                    <em>„Bună ziua,<br/>
+Vă contactez din partea UniCredit cu privire la o tranzacție suspectă efectuată în ultima ora la mall Suceava. Dacă nu recunoașteți această tranzacție, va rog să îmi spuneți parola contului dvs. pentru a o anula.”</em>
                 </div>
                 <div>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
@@ -84,11 +102,12 @@ UniCredit Bank.”</em>
             <div class="quiz" data-type="phone">
                 <div class="phishing-example">
                     <strong>Exemplu 2:</strong><br>
-                    <em>„Bună ziua, vă sunăm pentru confirmarea programării la bancă.”</em>
+                    <em>„Bună ziua, stimate Ion,<br/>
+Vă contactez din partea UniCredit cu privire la o campanie pe care o desfășurăm în prezent. Campania implică înscrierea voluntară într-un concurs la care, prin tragere la sorți a bonurilor fiscale ale ultimelor tranzacții, puteți câștiga un premiu în valoare de 10.000 de euro. Dacă doriți să participați, va trebui să îmi spuneți acum locația de unde ați făcut ultima tranzacție.”</em>
                 </div>
                 <div>
-                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
-                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
                 </div>
             </div>
             <div class="quiz" data-type="phone">
@@ -100,9 +119,6 @@ UniCredit Bank.”</em>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
                     <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
                 </div>
-            </div>
-            <div class="tip">
-                <strong>Important:</strong> Banca nu vă va cere niciodată coduri sau date personale prin telefon.
             </div>
         </section>
 
@@ -238,28 +254,27 @@ UniCredit Bank.”</em>
                 },
                 valid: {
                     correct: false,
-                    mas: "<strong>Greșit!</strong> Banca nu îți va cere niciodată completarea unui formular pe un site exterior aplicației și, cel mai probabil, nu va ajunge în situația de a fi nevoită să ceară clienților reintroducerea datelor, fiind strict reglementată de către Banca Națională a României."
-                    
-                }
-            },
-            {
-                suspicious: {
-                    correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Acesta este un email obișnuit, fără cereri suspecte."
-                },
-                valid: {
-                    correct: true,
-                    msg: "<strong>Corect!</strong> Acesta este un email valid, nu conține cereri de date personale sau linkuri suspecte."
+                    msg: "<strong>Greșit!</strong> Banca nu îți va cere niciodată completarea unui formular pe un site exterior aplicației și, cel mai probabil, nu va ajunge în situația de a fi nevoită să ceară clienților reintroducerea datelor, fiind strict reglementată de către Banca Națională a României."        
                 }
             },
             {
                 suspicious: {
                     correct: true,
-                    msg: "<strong>Corect!</strong> Emailul cere date personale pentru a primi un premiu – acesta este un semnal clar de fraudă."
+                    msg: "<strong>Corect!</strong> Din prisma reglementărilor stricte, posibilitatea de a efectua accidental operațiuni fără acordul dumneavoastră este zero. În cazul în care primiți un astfel de email, verificați istoricul tranzacțiilor din aplicația de Mobile Banking și, dacă sunt nelămuriri, contactați un call center al băncii. Evitați să dați click pe link-uri necunoscute, deoarece va expuneți riscului de a vă compromite datele."
                 },
                 valid: {
                     correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Nu trimite niciodată date personale pentru a primi premii!"
+                    msg: "Greșit! Din prisma reglementărilor stricte, posibilitatea de a efectua accidental operațiuni fără acordul dumneavoastră este zero. În cazul în care primiți un astfel de email, verificați istoricul tranzacțiilor din aplicația de Mobile Banking și, dacă sunt nelămuriri, contactați un call center al băncii. Evitați să dați click pe link-uri necunoscute, deoarece va expuneți riscului de a vă compromite datele."
+                }
+            },
+            {
+                suspicious: {
+                    correct: false,
+                    msg: "<strong>Greșit!</strong> Informațiile se găsesc pe un site legitim al băncii, securizat (https) și nu sunt solicitate alte acțiuni.",
+                },
+                valid: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Informațiile se găsesc pe un site legitim al băncii, securizat (https) și nu sunt solicitate alte acțiuni."
                 }
             }
         ],
@@ -267,21 +282,21 @@ UniCredit Bank.”</em>
             {
                 suspicious: {
                     correct: true,
-                    msg: "<strong>Corect!</strong> Banca nu va cere niciodată coduri de autentificare prin telefon."
+                    msg: "<strong>Corect!</strong> Chiar dacă numărul pare să provină din partea băncii, există o tehnică numită spoofing prin care un număr legitim poate fi falsificat. Verificați întotdeauna tranzacțiile în aplicația de Mobile Banking și contactați un call center al băncii în cazul în care sunteți încă nesigur(ă).",
                 },
                 valid: {
                     correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Nu divulga niciodată coduri primite prin SMS!"
+                    msg: "<strong>Greșit!</strong> Chiar dacă numărul pare să provină din partea băncii, există o tehnică numită spoofing prin care un număr legitim poate fi falsificat. Verificați întotdeauna tranzacțiile în aplicația de Mobile Banking și contactați un call center al băncii în cazul în care sunteți încă nesigur(ă).",
                 }
             },
             {
                 suspicious: {
                     correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Acesta este un apel valid, nu se cer date personale."
+                    msg: "<strong>Corect!</strong> Nu oferiți niciodată locația dvs. unei persoane necunoscute, deoarece această informație poate fi folosită pentru a facilita infracțiuni precum furtul. Dacă sunteți nesigur(ă), verificați surse oficiale precum site-ul băncii sau contactați un call center autorizat.",
                 },
                 valid: {
                     correct: true,
-                    msg: "<strong>Corect!</strong> Acesta este un apel obișnuit de la bancă pentru confirmare."
+                    msg: "<strong>Greșit!</strong> Nu oferiți niciodată locația dvs. unei persoane necunoscute, deoarece această informație poate fi folosită pentru a facilita infracțiuni precum furtul. Dacă sunteți nesigur(ă), verificați surse oficiale precum site-ul băncii sau contactați un call center autorizat."
                 }
             },
             {
@@ -329,15 +344,19 @@ UniCredit Bank.”</em>
         ]
     };
 
-    // Quiz logic cu mesaje custom
-    document.querySelectorAll('.quiz').forEach((quizEl, quizIdx) => {
-        const type = quizEl.getAttribute('data-type');
-        quizEl.querySelectorAll('.quiz-btn').forEach((btn) => {
-            btn.addEventListener('click', function() {
-                const answer = this.getAttribute('data-answer');
-                const isCorrect = this.getAttribute('data-correct') === 'true';
-                let message = quizMessages[type][quizIdx][answer].msg;
-                showModal(message, isCorrect);
+    // Quiz logic cu mesaje custom - FIX pentru index corect la fiecare tip de quiz
+    const quizTypeCounters = { email: 0, phone: 0, link: 0 };
+    document.querySelectorAll('.section').forEach(section => {
+        section.querySelectorAll('.quiz').forEach((quizEl) => {
+            const type = quizEl.getAttribute('data-type');
+            const idx = quizTypeCounters[type]++;
+            quizEl.querySelectorAll('.quiz-btn').forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    const answer = this.getAttribute('data-answer');
+                    const isCorrect = this.getAttribute('data-correct') === 'true';
+                    let message = quizMessages[type][idx][answer].msg;
+                    showModal(message, isCorrect);
+                });
             });
         });
     });
