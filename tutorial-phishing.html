@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 2 – Învață cum să eviți fraudele</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <header class="uc-header">
+        <div class="uc-header__container">
+            <img src="assets/unicredit-logo.svg" alt="UniCredit" class="uc-header__logo" />
+        </div>
+    </header>
+    <main class="uc-dashboard">
+        <h1 class="uc-dashboard__title">Tutorial 2 – Învață cum să eviți fraudele</h1>
+        <section class="uc-info-banner" aria-label="Scop educațional">
+            <svg class="uc-info-banner__icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#007A91"/>
+                <text x="12" y="17" text-anchor="middle" font-size="14" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">i</text>
+            </svg>
+            <div>
+                <strong>Scop educațional:</strong> În spatele unui email poate sta oricine, așa că este important să înțelegeți intenția din spatele lui și să fiți atent la potențiale semnale de alarmă. Cum ți se par următoarele exemple de email-uri?
+<br /><br />Un email suspicios nu înseamnă în mod necesar intenții rele, ci doar necesită o verificare suplimentară.
+            </div>
+        </section>
+    
+        <!-- START: Quiz Section -->
+        <section class="section" id="phishing-quiz">
+            <h2>Emailuri – Recunoaște frauda</h2>
+            <div class="quiz" data-type="email">
+                <div class="phishing-example">
+                    <strong>Exemplu 1:</strong><br>
+                    <em>„Contul dvs. a fost blocat. Pentru a-l reactiva, accesați <a href="#">acest link</a> și introduceți datele cardului.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="email">
+                <div class="phishing-example">
+                    <strong>Exemplu 2:</strong><br>
+                    <em>„Bună ziua, vă trimitem extrasul de cont solicitat. O zi frumoasă!”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="email">
+                <div class="phishing-example">
+                    <strong>Exemplu 3:</strong><br>
+                    <em>„Felicitări! Ați câștigat un premiu. Trimiteți CNP-ul și IBAN-ul pentru a primi banii.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="tip">
+                <strong>Știai că?</strong> Emailurile care cer date personale sau accesarea unor linkuri suspecte sunt de obicei tentative de fraudă.
+            </div>
+        </section>
+
+        <section class="section" id="phone-quiz">
+            <h2>Telefon – Recunoaște frauda</h2>
+            <div class="quiz" data-type="phone">
+                <div class="phishing-example">
+                    <strong>Exemplu 1:</strong><br>
+                    <em>„Sunt de la bancă. Vă rog să-mi spuneți codul primit prin SMS pentru a vă verifica identitatea.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="phone">
+                <div class="phishing-example">
+                    <strong>Exemplu 2:</strong><br>
+                    <em>„Bună ziua, vă sunăm pentru confirmarea programării la bancă.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="phone">
+                <div class="phishing-example">
+                    <strong>Exemplu 3:</strong><br>
+                    <em>„Aveți o plată restantă. Pentru a evita penalizări, transferați urgent suma la acest IBAN.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="tip">
+                <strong>Important:</strong> Banca nu vă va cere niciodată coduri sau date personale prin telefon.
+            </div>
+        </section>
+
+        <section class="section" id="link-quiz">
+            <h2>Link-uri – Recunoaște frauda</h2>
+            <div class="quiz" data-type="link">
+                <div class="phishing-example">
+                    <strong>Exemplu 1:</strong><br>
+                    <em>„Accesați <a href='http://unicredit-banca-secure.com'>unicredit-banca-secure.com</a> pentru a vă actualiza datele.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="link">
+                <div class="phishing-example">
+                    <strong>Exemplu 2:</strong><br>
+                    <em>„Accesați <a href='https://www.unicredit.ro'>unicredit.ro</a> pentru informații despre contul dvs.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
+                </div>
+            </div>
+            <div class="quiz" data-type="link">
+                <div class="phishing-example">
+                    <strong>Exemplu 3:</strong><br>
+                    <em>„Ați primit o factură nouă. Deschideți <a href='http://facturi-urgent.ro'>acest link</a> pentru detalii.”</em>
+                </div>
+                <div>
+                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
+                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
+                </div>
+            </div>
+            <div class="tip">
+                <strong>Verifică mereu:</strong> Adresa site-ului trebuie să fie corectă și să înceapă cu <code>https://</code>.
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="tip">
+                <strong>Reține:</strong> Fii mereu atent la cererile primite pe email, telefon sau link-uri. Dacă ai dubii, contactează banca direct!
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div id="modal-info">
+            <div id="modal-content">
+                <button id="modal-close" aria-label="Închide">&times;</button>
+                <div id="modal-message"></div>
+            </div>
+        </div>
+        <!-- END: Quiz Section -->
+    </main>
+    <!-- Footer identic pe toate paginile -->
+    <footer class="uc-footer">
+        <nav class="uc-footer__nav" aria-label="Navigare principală">
+            <a href="index.html" class="uc-footer__item">
+                <span class="uc-footer__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                </span>
+                <span class="uc-footer__label">Acasă</span>
+            </a>
+            <a href="#" class="uc-footer__item">
+                <span class="uc-footer__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v6l4 2"></path>
+                    </svg>
+                </span>
+                <span class="uc-footer__label">Statistici</span>
+            </a>
+            <a href="#" class="uc-footer__item">
+                <span class="uc-footer__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="12" rx="2"></rect>
+                        <path d="M3 16h18"></path>
+                        <line x1="12" y1="12" x2="12" y2="16"></line>
+                        <polyline points="7 12 12 7 17 12"></polyline>
+                    </svg>
+                </span>
+                <span class="uc-footer__label">Plăți</span>
+            </a>
+            <a href="#" class="uc-footer__item">
+                <span class="uc-footer__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                </span>
+                <span class="uc-footer__label">Oferte</span>
+            </a>
+            <a href="#" class="uc-footer__item">
+                <span class="uc-footer__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <circle cx="12" cy="5" r="1"></circle>
+                        <circle cx="12" cy="19" r="1"></circle>
+                    </svg>
+                </span>
+                <span class="uc-footer__label">Mai multe</span>
+            </a>
+        </nav>
+    </footer>
+    <script>
+    // Modal logic
+    const modal = document.getElementById('modal-info');
+    const modalMsg = document.getElementById('modal-message');
+    const modalClose = document.getElementById('modal-close');
+
+    function showModal(message, isCorrect) {
+        modalMsg.innerHTML = message;
+        modalMsg.style.color = isCorrect ? '#22c55e' : '#E2001A';
+        modal.style.display = 'flex';
+    }
+    modalClose.onclick = () => { modal.style.display = 'none'; };
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+    // Quiz logic
+    document.querySelectorAll('.quiz-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const isCorrect = this.getAttribute('data-correct') === 'true';
+            let message = '';
+            if (isCorrect) {
+                message = '<strong>Corect!</strong> Ai identificat corect tentativa de fraudă sau mesajul valid.';
+            } else {
+                message = '<strong>Răspuns greșit.</strong> Mai multă atenție la detalii! Citește explicația de mai sus.';
+            }
+            showModal(message, isCorrect);
+        });
+    });
+    </script>
+</body>
+</html>
