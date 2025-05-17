@@ -27,11 +27,17 @@
     
         <!-- START: Quiz Section -->
         <section class="section" id="phishing-quiz">
-            <h2>Emailuri – Recunoaște frauda</h2>
+            <h2>Email-uri – Recunoaște frauda</h2>
             <div class="quiz" data-type="email">
                 <div class="phishing-example">
                     <strong>Exemplu 1:</strong><br>
-                    <em>„Contul dvs. a fost blocat. Pentru a-l reactiva, accesați <a href="#">acest link</a> și introduceți datele cardului.”</em>
+                    <em>„Bună ziua,<br/><br/>
+
+În urma unui atac cibernetic, baza de date UniCredit a fost ștearsă de către un virus, iar din backup-urile existente au putut fi recuperate doar o parte din date. Nicio informație personală nu a fost dezvăluită atacatorilor. Pentru a va putea reintroduce în sistemul nostru, este nevoie să completați următorul formular cu datele dvs: <a href="#">Link aici</a>.
+<br/><br/>
+
+O zi frumoasă!<br/>
+UniCredit Bank.”</em>
                 </div>
                 <div>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
@@ -214,24 +220,125 @@
     const modalClose = document.getElementById('modal-close');
 
     function showModal(message, isCorrect) {
+        // Folosim albastru pentru corect, rosu pentru gresit
         modalMsg.innerHTML = message;
-        modalMsg.style.color = isCorrect ? '#22c55e' : '#E2001A';
+        modalMsg.style.color = isCorrect ? '#007A91' : '#E2001A';
         modal.style.display = 'flex';
     }
     modalClose.onclick = () => { modal.style.display = 'none'; };
     window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
 
-    // Quiz logic
-    document.querySelectorAll('.quiz-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const isCorrect = this.getAttribute('data-correct') === 'true';
-            let message = '';
-            if (isCorrect) {
-                message = '<strong>Corect!</strong> Ai identificat corect tentativa de fraudă sau mesajul valid.';
-            } else {
-                message = '<strong>Răspuns greșit.</strong> Mai multă atenție la detalii! Citește explicația de mai sus.';
+    // Mesaje custom pentru fiecare exemplu și răspuns
+    const quizMessages = {
+        email: [
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Banca nu îți va cere niciodată completarea unui formular pe un site exterior aplicației și, cel mai probabil, nu va ajunge în situația de a fi nevoită să ceară clienților reintroducerea datelor, fiind strict reglementată de către Banca Națională a României."
+                },
+                valid: {
+                    correct: false,
+                    mas: "<strong>Greșit!</strong> Banca nu îți va cere niciodată completarea unui formular pe un site exterior aplicației și, cel mai probabil, nu va ajunge în situația de a fi nevoită să ceară clienților reintroducerea datelor, fiind strict reglementată de către Banca Națională a României."
+                    
+                }
+            },
+            {
+                suspicious: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Acesta este un email obișnuit, fără cereri suspecte."
+                },
+                valid: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Acesta este un email valid, nu conține cereri de date personale sau linkuri suspecte."
+                }
+            },
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Emailul cere date personale pentru a primi un premiu – acesta este un semnal clar de fraudă."
+                },
+                valid: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Nu trimite niciodată date personale pentru a primi premii!"
+                }
             }
-            showModal(message, isCorrect);
+        ],
+        phone: [
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Banca nu va cere niciodată coduri de autentificare prin telefon."
+                },
+                valid: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Nu divulga niciodată coduri primite prin SMS!"
+                }
+            },
+            {
+                suspicious: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Acesta este un apel valid, nu se cer date personale."
+                },
+                valid: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Acesta este un apel obișnuit de la bancă pentru confirmare."
+                }
+            },
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Solicitarea de a transfera bani urgent la un IBAN necunoscut este un semnal de fraudă."
+                },
+                valid: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Nu transfera bani la cerere fără verificări suplimentare!"
+                }
+            }
+        ],
+        link: [
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Domeniul nu este cel oficial al băncii. Nu accesa astfel de linkuri!"
+                },
+                valid: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Adresa nu este cea oficială a băncii. Fii atent la domeniu!"
+                }
+            },
+            {
+                suspicious: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Acesta este un link sigur, aparține băncii și folosește https."
+                },
+                valid: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Linkul este valid și aparține băncii."
+                }
+            },
+            {
+                suspicious: {
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Linkul duce către un site necunoscut și poate fi periculos."
+                },
+                valid: {
+                    correct: false,
+                    msg: "<strong>Răspuns greșit.</strong> Nu accesa linkuri necunoscute primite pe email!"
+                }
+            }
+        ]
+    };
+
+    // Quiz logic cu mesaje custom
+    document.querySelectorAll('.quiz').forEach((quizEl, quizIdx) => {
+        const type = quizEl.getAttribute('data-type');
+        quizEl.querySelectorAll('.quiz-btn').forEach((btn) => {
+            btn.addEventListener('click', function() {
+                const answer = this.getAttribute('data-answer');
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                let message = quizMessages[type][quizIdx][answer].msg;
+                showModal(message, isCorrect);
+            });
         });
     });
     </script>
