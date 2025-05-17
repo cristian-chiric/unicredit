@@ -127,7 +127,7 @@ Vă contactez din partea UniCredit cu privire la o campanie pe care o desfășur
             <div class="quiz" data-type="link">
                 <div class="phishing-example">
                     <strong>Exemplu 1:</strong><br>
-                    <em>„Accesați <a href='http://unicredit-banca-secure.com'>unicredit-banca-secure.com</a> pentru a vă actualiza datele.”</em>
+                    <em>„Accesați <a href='#'>uni.credit.xyz</a>.”</em>
                 </div>
                 <div>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
@@ -137,31 +137,12 @@ Vă contactez din partea UniCredit cu privire la o campanie pe care o desfășur
             <div class="quiz" data-type="link">
                 <div class="phishing-example">
                     <strong>Exemplu 2:</strong><br>
-                    <em>„Accesați <a href='https://www.unicredit.ro'>unicredit.ro</a> pentru informații despre contul dvs.”</em>
-                </div>
-                <div>
-                    <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="false">Suspicios</button>
-                    <button class="button-secondary quiz-btn" data-answer="valid" data-correct="true">Valid</button>
-                </div>
-            </div>
-            <div class="quiz" data-type="link">
-                <div class="phishing-example">
-                    <strong>Exemplu 3:</strong><br>
-                    <em>„Ați primit o factură nouă. Deschideți <a href='http://facturi-urgent.ro'>acest link</a> pentru detalii.”</em>
+                    <em>„Accesați <a href='#'>uniсredit.ro</a>.”</em>
                 </div>
                 <div>
                     <button class="button-primary quiz-btn" data-answer="suspicious" data-correct="true">Suspicios</button>
                     <button class="button-secondary quiz-btn" data-answer="valid" data-correct="false">Valid</button>
                 </div>
-            </div>
-            <div class="tip">
-                <strong>Verifică mereu:</strong> Adresa site-ului trebuie să fie corectă și să înceapă cu <code>https://</code>.
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="tip">
-                <strong>Reține:</strong> Fii mereu atent la cererile primite pe email, telefon sau link-uri. Dacă ai dubii, contactează banca direct!
             </div>
         </section>
 
@@ -301,12 +282,12 @@ Vă contactez din partea UniCredit cu privire la o campanie pe care o desfășur
             },
             {
                 suspicious: {
-                    correct: true,
-                    msg: "<strong>Corect!</strong> Solicitarea de a transfera bani urgent la un IBAN necunoscut este un semnal de fraudă."
+                    correct: false,
+                    msg: "<strong>Greșit!</strong> Nu sunt solicitate alte date, iar verificarea informațiilor menționate se poate face fizic, la sediul băncii"
                 },
                 valid: {
-                    correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Nu transfera bani la cerere fără verificări suplimentare!"
+                    correct: true,
+                    msg: "<strong>Corect!</strong> Nu sunt solicitate alte date, iar verificarea informațiilor menționate se poate face fizic, la sediul băncii.",
                 }
             }
         ],
@@ -314,31 +295,21 @@ Vă contactez din partea UniCredit cu privire la o campanie pe care o desfășur
             {
                 suspicious: {
                     correct: true,
-                    msg: "<strong>Corect!</strong> Domeniul nu este cel oficial al băncii. Nu accesa astfel de linkuri!"
+                    msg: "<strong>Corect!</strong> Linkul trimite la un domeniu de nivel superior (.xyz) aproape neutilizat de către site-uri oficiale. De asemenea, trebuie verificată întotdeauna legitimitatea link-urilor în care numele unei companii este separat prin punct."
                 },
                 valid: {
                     correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Adresa nu este cea oficială a băncii. Fii atent la domeniu!"
+                    msg: "<strong>Greșit!</strong> Linkul trimite la un domeniu de nivel superior (.xyz) aproape neutilizat de către site-uri oficiale. De asemenea, trebuie verificată întotdeauna legitimitatea link-urilor în care numele unei companii este separat prin punct."
                 }
             },
             {
                 suspicious: {
                     correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Acesta este un link sigur, aparține băncii și folosește https."
+                    msg: "<strong>Corect!</strong> Litera “c” a fost înlocuită cu litera “s” din alfabetul rus. Verifică întotdeauna dacă anumite caractere au fost înlocuite cu unele similare din alte limbi."
                 },
                 valid: {
                     correct: true,
-                    msg: "<strong>Corect!</strong> Linkul este valid și aparține băncii."
-                }
-            },
-            {
-                suspicious: {
-                    correct: true,
-                    msg: "<strong>Corect!</strong> Linkul duce către un site necunoscut și poate fi periculos."
-                },
-                valid: {
-                    correct: false,
-                    msg: "<strong>Răspuns greșit.</strong> Nu accesa linkuri necunoscute primite pe email!"
+                    msg: "<strong>Greșit!</strong> Litera “c” a fost înlocuită cu litera “s” din alfabetul rus. Verifică întotdeauna dacă anumite caractere au fost înlocuite cu unele similare din alte limbi."
                 }
             }
         ]
