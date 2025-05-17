@@ -3,38 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joc de Investiții UniCredit</title>
+    <title>Tutorial 1 – Totul despre depozit la termen</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <!-- HEADER UniCredit -->
     <header class="uc-header">
         <div class="uc-header__container">
             <img src="assets/unicredit-logo.svg" alt="UniCredit" class="uc-header__logo" />
         </div>
     </header>
     <main class="uc-dashboard">
-        <h1 class="uc-dashboard__title">Educație financiară și siguranță digitală</h1>
-        <section class="uc-info-banner" aria-label="Scop educațional">
-            <svg class="uc-info-banner__icon" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="12" fill="#007A91"/>
-                <text x="12" y="17" text-anchor="middle" font-size="14" font-family="Arial, sans-serif" fill="#fff" font-weight="bold">i</text>
-            </svg>
-            <div>
-                <strong>Scop educațional:</strong> Acest joc și tutorialele asociate te ajută să înțelegi concepte financiare de bază și să recunoști metodele de prevenire a fraudelor bancare. Investește informat și fii mereu atent la securitatea datelor tale!
-            </div>
+        <h1 class="uc-dashboard__title">Tutorial 1 – Totul despre depozit la termen</h1>
+        <section class="tutorial">
+            <p>
+                Un depozit la termen este o sumă de bani depusă la bancă pentru o perioadă fixă, cu o dobândă garantată.<br>
+                <strong>Avantaje:</strong>
+                <ul>
+                    <li>Randament fix și garantat</li>
+                    <li>Ideal pentru economii pe termen mediu</li>
+                    <li>Fără comisioane ascunse</li>
+                </ul>
+                <strong>Dezavantaje:</strong>
+                <ul>
+                    <li>Randament mai mic comparativ cu alte investiții riscante</li>
+                    <li>Retragerea anticipată duce la pierderea dobânzii</li>
+                </ul>
+                <strong>Riscuri:</strong>
+                <ul>
+                    <li>Inflația poate eroda puterea de cumpărare a dobânzii</li>
+                </ul>
+            </p>
         </section>
-        <nav class="main-menu">
-            <ul>
-                <li><a href="joc.html">Joc de Investiții</a></li>
-                <li><a href="tutorial-depozit.html">Tutorial 1 – Totul despre depozit la termen</a></li>
-            </ul>
-        </nav>
     </main>
     <!-- Footer identic pe toate paginile -->
     <footer class="uc-footer">
         <nav class="uc-footer__nav" aria-label="Navigare principală">
-            <a href="index.html" class="uc-footer__item is-active">
+            <a href="index.html" class="uc-footer__item">
                 <span class="uc-footer__icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -86,22 +90,5 @@
             </a>
         </nav>
     </footer>
-    <script>
-        // Get all footer navigation items
-        const navItems = document.querySelectorAll('.uc-footer__item');
-
-        // Add click event listener to each navigation item
-        navItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default anchor behavior for now
-
-                // Remove 'is-active' class from all items
-                navItems.forEach(nav => nav.classList.remove('is-active'));
-
-                // Add 'is-active' class to the clicked item
-                item.classList.add('is-active');
-            });
-        });
-    </script>
 </body>
 </html>

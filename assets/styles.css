@@ -619,3 +619,131 @@ body {
         max-width: 98vw;
     }
 }
+
+/* Adaugă în assets/styles.css */
+.main-menu {
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.main-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.main-menu li {
+    margin-bottom: 1.5rem;
+}
+.main-menu a {
+    font-size: 1.2rem;
+    color: #007A91;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.main-menu a:hover {
+    color: #E2001A;
+}
+
+.uc-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #e6f3f6;
+    color: #1a2a32;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.uc-info-banner__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.uc-info-banner strong {
+    color: #007A91;
+}
+
+/* Dashboard wrapper */
+.uc-dashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px 16px 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Titlu dashboard */
+.uc-dashboard__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #1a2a32;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    text-align: left;
+}
+
+/* Info banner */
+.uc-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #e6f3f6;
+    color: #1a2a32;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.uc-info-banner__icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.uc-info-banner strong {
+    color: #007A91;
+}
+
+/* Main menu */
+.main-menu {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 24px 20px;
+    margin-top: 0;
+}
+
+.main-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-menu li {
+    margin: 0;
+}
+
+.main-menu a {
+    font-size: 1.15rem;
+    color: #007A91;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    padding: 8px 0;
+    display: block;
+}
+
+.main-menu a:hover {
+    color: #E2001A;
+}
