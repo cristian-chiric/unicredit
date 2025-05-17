@@ -519,38 +519,44 @@ body {
 /* Toast notifications - UniCredit Design System */
 .toast-message {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    align-items: center;
+    gap: 16px;
     width: 100%;
-    max-width: 440px;
-    padding: 16px;
-    background: #fff;
+    max-width: 520px;
+    padding: 20px 28px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    margin-bottom: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    margin-bottom: 12px;
     opacity: 0;
     transform: translateY(-20px);
     transition: transform 0.3s ease, opacity 0.3s ease;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #fff; /* va fi suprascris mai jos */
+    color: #fff;      /* va fi suprascris mai jos */
 }
 
 .toast-message.toast-info {
-    border-left: 4px solid #007A91;
+    background: #007A91;
+    color: #fff;
+    border-left: none;
 }
 
 .toast-message.toast-error {
-    border-left: 4px solid #E2001A;
+    background: #E2001A;
+    color: #fff;
+    border-left: none;
 }
 
 .toast-message .toast-icon {
     flex-shrink: 0;
     display: flex;
-    align-items: flex-start;
-}
-
-.toast-message .toast-icon svg {
-    width: 24px;
-    height: 24px;
-    color: inherit;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    margin-right: 16px;
 }
 
 .toast-message.toast-info .toast-icon svg {
@@ -561,13 +567,25 @@ body {
     color: #E2001A;
 }
 
+.toast-message .toast-icon svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
 .toast-message .toast-content {
     flex: 1;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    line-height: 20px;
-    color: #222222;
-    padding-top: 2px;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    color: #fff;
+    font-weight: 400;
+    padding-top: 0;
+}
+
+.toast-message .toast-content strong {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
 }
 
 .toast-message.toast-visible {
@@ -583,22 +601,21 @@ body {
 #toast-container {
     position: fixed;
     top: 76px;
-    right: 16px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     z-index: 9999;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     pointer-events: none;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .toast-message {
-        width: calc(100vw - 32px);
-        margin-left: 16px;
-        margin-right: 16px;
-    }
-    
-    #toast-container {
-        right: 0;
+        width: calc(100vw - 24px);
+        padding: 16px 8px;
+        max-width: 98vw;
     }
 }
