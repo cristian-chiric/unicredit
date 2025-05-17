@@ -239,7 +239,7 @@
     ];
 
     // --- Variabile de stare ---
-    let currentAccount = 2000; // bani disponibili
+    let currentAccount = 1000; // bani disponibili
     let allocations = { cont_economii: 0, depozit_termen: [], fond_mutual: 0 };
     let depozitActive = []; // {amount, monthsLeft, totalMonths, rate, startMonth}
     let quizPassed = {};
@@ -247,7 +247,7 @@
     let intervalId = null;
     let autoMonthId = null;
     let eventsHistory = [];
-    let portfolioHistory = [2000];
+    let portfolioHistory = [1000];
     let currentMonth = 1;
     let unlockedInstruments = ["cont_economii"];
     let profitStats = {
@@ -266,7 +266,7 @@
                 labels: ['Start'],
                 datasets: [{
                     label: 'Portofoliu total (EUR)',
-                    data: [2000],
+                    data: [1000],
                     borderColor: '#ED1C24',
                     backgroundColor: 'rgba(237,28,36,0.08)',
                     tension: 0.2,
@@ -694,7 +694,7 @@
         randomEvent();
 
         // Alimentare automată cont curent
-        currentAccount += 2000;
+        currentAccount += 1000;
         showNotification("Contul tău curent a fost alimentat cu 2.000 EUR!", "info");
 
         // Actualizare UI și istoric
@@ -730,7 +730,7 @@
             .map(([k, v]) => `<li><strong>${instrumentsData.find(i => i.id === k)?.name || k}:</strong> ${v.toFixed(2)} EUR profit</li>`)
             .join('');
 
-        let totalInvested = 2000 * 12; // 2000 alimentare/lună * 12 luni
+        let totalInvested = 1000 * 12; // 1000 alimentare/lună * 12 luni
         let totalFinal = portfolioHistory[portfolioHistory.length-1];
         let totalProfit = totalFinal - totalInvested;
         let randamentFinal = ((totalProfit / totalInvested) * 100).toFixed(2);
@@ -761,7 +761,7 @@
     // --- Inițializare joc ---
     function initGame() {
         currentMonth = 1;
-        portfolioHistory = [2000];
+        portfolioHistory = [1000];
         document.getElementById('month').textContent = currentMonth;
         initChart();
         updateChart();
