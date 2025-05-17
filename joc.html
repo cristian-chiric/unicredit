@@ -101,7 +101,7 @@
     const instrumentsData = [
         {
             id: "cont_economii",
-            name: "Cont de Economii",
+            name: "Cont de Economii (1.8%)",
             description: "Risc scăzut, randament scăzut, lichiditate ridicată.",
             unlock_month: 1,
             info: {
@@ -569,7 +569,7 @@
             container.innerHTML = `<div class="quiz-result success">Felicitări! Ai deblocat <strong>${quiz.title}</strong>.</div>`;
             setTimeout(() => { container.innerHTML = ''; renderAllocForm(); }, 1500);
         } else {
-            container.innerHTML += `<div class="quiz-result fail">Ai obținut ${percent}%. Ai nevoie de 80% pentru deblocare. Încearcă din nou.</div>`;
+            container.innerHTML += `<div class="quiz-result fail">Ai obținut ${percent}%. Ai nevoie de 100% pentru deblocare. Încearcă din nou.</div>`;
         }
     }
 
@@ -637,7 +637,7 @@
                 renderAllocForm();
             }, 1300);
         } else {
-            resultDiv.innerHTML = `<span style="color:#ED1C24;">Ai obținut ${percent}%. Ai nevoie de 80% pentru deblocare. Încearcă din nou.</span>`;
+            resultDiv.innerHTML = `<span style="color:#ED1C24;">Ai obținut ${percent}%. Ai nevoie de 100% pentru deblocare. Încearcă din nou.</span>`;
         }
     }
 
