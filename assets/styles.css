@@ -165,11 +165,11 @@ button:hover {
 }
 .quiz-result.success {
     background: #e6f7e6;
-    color: #137333;
+    color: #007A91;
 }
 .quiz-result.fail {
     background: #fff5f5;
-    color: #b91c1c;
+    color: #E2001A;
 }
 
 .disabled { pointer-events: none; opacity: 0.5; }
